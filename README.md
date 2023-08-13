@@ -20,7 +20,7 @@ First you need to install [tanka]<https://tanka.dev/install>, for this project `
 ```sh
 mkdir kube.acme.sh
 cd kube.acme.sh
-git clone https://github.com/dxlr8r/kube.acme.git chart
+git clone https://github.com/dxlr8r/kube.acme.sh.git chart
 cp example.config.jsonnet config.jsonnet
 ```
 
@@ -32,6 +32,22 @@ Then provision the chart to your current kubectl context using `tk` (tanka):
 tk apply chart --tla-str context=$(kubectl config current-context) --tla-code config="$(cat config.jsonnet)"
 ```
 
-kubectl delete -n acme-sh $(kubectl get -n acme-sh job -o name)
-kubectl create -n acme-sh job acme-sh-run --from=cronjob/acme-sh
-kubectl logs -n acme-sh $(kubectl get -n acme-sh pods -o name | head -n1)
+## Miscellaneous
+
+### Run manually/check if working
+
+Not wanting to wait for the CronJob? Or you want to check if your configuration is right?
+
+```sh
+config=$(tk eval chart --tla-str context=$(kubectl config current-context) --tla-code config="$(cat config.jsonnet)" -e 'data.config'); export config
+name=$(jq -rn '$ENV.config | fromjson | .name')
+namespace=$(jq -rn '$ENV.config | fromjson | .namespace')
+kubectl create -n $namespace job ${name}-$RANDOM --from=cronjob/$name
+kubectl logs -f -n $namespace $(kubectl get -n $namespace pods -o name | head -n1)
+```
+
+Cleanup with:
+
+```sh
+kubectl delete -n $namespace $(kubectl get -n $namespace job -o name)
+```
