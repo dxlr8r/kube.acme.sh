@@ -21,10 +21,10 @@ First you need to install [tanka](https://tanka.dev/install), for this project `
 mkdir kube.acme.sh
 cd kube.acme.sh
 git clone https://github.com/dxlr8r/kube.acme.sh.git chart
-cp example.config.jsonnet config.jsonnet
+cp chart/example.config.jsonnet config.jsonnet
 ```
 
-Then setup the config file, using `example.config.jsonnet` as a template and reference.
+Then setup the `config.jsonnet` file, created with `example.config.jsonnet` as a template and reference.
 
 Then provision the chart to your current kubectl context using `tk` (tanka):
 
