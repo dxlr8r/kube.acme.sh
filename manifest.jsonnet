@@ -207,4 +207,4 @@ local manifest =
     }
   }
 };
-lib.obj.forEach(function(f,v) { [f]: v + { metadata+: { labels+: config.labels }} }, manifest) // apply labels to all resources
+lib.obj.forEach(function(f,v) { [f]: v + { metadata+: { labels+: config.labels }} }, manifest) + {config:: config} // apply labels to all resources
