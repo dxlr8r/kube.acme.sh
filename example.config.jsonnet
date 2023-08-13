@@ -13,5 +13,5 @@
     }
   },
   // create the secret with the certificate in these namespaces
-  target_namespace: ['testing', 'default']
+  target_namespace: ['example', 'default']
 }
