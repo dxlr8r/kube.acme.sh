@@ -6,7 +6,7 @@
   // all fields in acme_sh are required
   acme_sh: {
     email: 'me@example.com',
-    args: '--issue --dns dns_domeneshop -d hello.example.com',
+    args: '--issue --dns dns_provider -d hello.example.com',
     env: {
       DNSProvider_Token: 'mytoken',
       DNSProvider_Secret: 'mysecret'
