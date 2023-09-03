@@ -4,3 +4,4 @@ imports:
 git module dxsonnet:
   url: https://github.com/dxlr8r/dxsonnet.git
   export: lib
+  pick: lib/obj.libsonnet

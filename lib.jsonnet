@@ -2,8 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 { 
-  obj: import 'vendor/lib/dxsonnet/obj.libsonnet',
-  test: import 'vendor/lib/dxsonnet/test.libsonnet'
+  dx: { obj: import 'vendor/lib/dxsonnet/obj.libsonnet'},
 } +
 {
   rand(data, modulo) :: 
