@@ -12,7 +12,7 @@ kurl() (
   rel_ref=$(echo $1 | sed 's#^/##')
   shift
   url="https://$KUBE_API/$rel_ref"
-  curl -f --no-progress-meter --cacert "$CA_CERT" -H "$AUTH" "$url" "$@"
+  curl -f --no-progress-meter --cacert "$CA_CERT" -H "$AUTH" "$url" "$@" || echo -e 'kurl failed:\n---\n'"curl -f --no-progress-meter --cacert \"$CA_CERT\" -H \"<redacated>\" \"$url\" \"$@\"""\n---" 2>&1
 )
 singularise() {
   echo "$1" | sed 's/s$//' | awk '{ print toupper(substr($0, 1, 1)) substr($0, 2); }'

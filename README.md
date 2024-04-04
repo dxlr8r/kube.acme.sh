@@ -35,7 +35,7 @@ tk apply chart --tla-str context=$(kubectl config current-context) --tla-code co
 Not wanting to wait for the CronJob? Or you want to check if your configuration is right?
 
 ```sh
-config=$(tk eval chart --tla-str context=$(kubectl config current-context) --tla-code config='import "config.jsonnet"' -e 'data.config'); export config
+config=$(tk eval chart --tla-code config='import "config.jsonnet"' --tla-code patch='function(c,l,m)c' -e 'data'); export config
 name=$(jq -rn '$ENV.config | fromjson | .name')
 namespace=$(jq -rn '$ENV.config | fromjson | .namespace')
 kubectl create -n $namespace job ${name}-$RANDOM --from=cronjob/$name
