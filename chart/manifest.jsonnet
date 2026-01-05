@@ -133,13 +133,7 @@ local manifest =
                   },
                   image: 'neilpang/acme.sh',
                   command: ['/bin/sh'],
-                  args: ['-c', 'cp -r /root/.acme.sh /workdir; chown -R %d:%d /workdir/' % [constant.runAsUser, constant.runAsGroup]],
-                  volumeMounts: [
-                    {
-                      name: 'workdir',
-                      mountPath: '/workdir'
-                    }
-                  ]
+                  args: ['-c', 'chown -R %d:%d /acme.sh' % [constant.runAsUser, constant.runAsGroup]]
                 }
               ],
               containers: [
@@ -174,10 +168,6 @@ local manifest =
                     {
                       name: 'entrypoint',
                       mountPath: '/kube.acme.sh'
-                    },
-                    {
-                      name: 'workdir',
-                      mountPath: '/workdir'
                     }
                   ]
                 },
@@ -194,10 +184,6 @@ local manifest =
                   configMap: {
                     name: config.name
                   }
-                },
-                {
-                  name: 'workdir',
-                  emptyDir: {}
                 }
               ],
               restartPolicy: 'OnFailure'

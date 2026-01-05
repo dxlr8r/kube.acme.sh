@@ -5,7 +5,7 @@
 KUBE_API='kubernetes.default.svc:443'
 CA_CERT=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 AUTH="Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)"
-ACME_INSTALL_DIR='/workdir/.acme.sh'
+ACME_INSTALL_DIR='/acme.sh'
 alias acme.sh="$ACME_INSTALL_DIR/acme.sh --home /acme.sh"
 
 kurl() (
